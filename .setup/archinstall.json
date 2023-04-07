@@ -25,7 +25,6 @@
         "curl"
     ],
     "parallel downloads": 4,
-    "profile": "gnome",
     "script": "guided",
     "silent": false,
     "timezone": "Europe/Berlin",
