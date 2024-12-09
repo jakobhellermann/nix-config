@@ -6,6 +6,21 @@ in
   home.username = "jakob";
   home.homeDirectory = "/home/jakob";
 
+  home.activation = {
+    installDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      GIT_DIR=".dotfiles"
+      WORK_TREE="."
+      if [ -d "$GIT_DIR" ]; then
+        $DRY_RUN_CMD git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" pull || _iError "Could not pull .dotfiles"
+      else
+        $DRY_RUN_CMD git --work-tree "$WORK_TREE" clone --bare https://github.com/jakobhellermann/dotfiles.git "$GIT_DIR"
+        $DRY_RUN_CMD git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" checkout
+        $DRY_RUN_CMD git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" config status.showUntrackedFiles no
+        $DRY_RUN_CMD git --git-dir "$GIT_DIR" --work-tree "$WORK_TREE" remote set-url origin git@github.com:jakobhellermann/dotfiles.git
+      fi
+    '';
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
