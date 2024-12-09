@@ -1,0 +1,105 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733754861,
+        "narHash": "sha256-3JKzIou54yjiMVmvgdJwopekEvZxX3JDT8DpKZs4oXY=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "9ebaa80a227eaca9c87c53ed515ade013bc2bca9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "janet-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "sway-autolayout",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685774487,
+        "narHash": "sha256-VH7qzeU+UU+x3wUBxWCKVHsBb66hTNk4/K6KOkpPGY0=",
+        "owner": "turnerdev",
+        "repo": "janet-nix",
+        "rev": "dadf3f220cdf74e6690fbbf6ca6e8cce510099fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "turnerdev",
+        "repo": "janet-nix",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1733581040,
+        "narHash": "sha256-Qn3nPMSopRQJgmvHzVqPcE3I03zJyl8cSbgnnltfFDY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "22c3f2cf41a0e70184334a958e6b124fb0ce3e01",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1733581040,
+        "narHash": "sha256-Qn3nPMSopRQJgmvHzVqPcE3I03zJyl8cSbgnnltfFDY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "22c3f2cf41a0e70184334a958e6b124fb0ce3e01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs",
+        "sway-autolayout": "sway-autolayout"
+      }
+    },
+    "sway-autolayout": {
+      "inputs": {
+        "janet-nix": "janet-nix",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1733776077,
+        "narHash": "sha256-RXEI9SYvdVu8U4s+HQf5t7KM/OQNJZ9dbz0YgYfI6Z8=",
+        "owner": "jakobhellermann",
+        "repo": "janet-swayipc",
+        "rev": "6c72d6a84fd3269ec084bea3458e9cf0b7d9466d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jakobhellermann",
+        "ref": "nix",
+        "repo": "janet-swayipc",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
