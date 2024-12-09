@@ -8,10 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      sway-autolayout,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -20,6 +27,12 @@
       homeConfigurations = {
         jakob = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = {
+            inherit system;
+            inputs = {
+              inherit sway-autolayout;
+            };
+          };
           modules = [ ./home.nix ];
         };
       };
