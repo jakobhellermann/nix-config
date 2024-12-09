@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
-
+{ pkgs, system, inputs, lib, ... }:
+let
+  sway-autolayout = inputs.sway-autolayout.packages.${system}.default;
+in
 {
   home.username = "jakob";
   home.homeDirectory = "/home/jakob";
@@ -16,6 +18,8 @@
   # environment.
   home.packages = with pkgs; [
     hello
+    sway-autolayout
+
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
@@ -38,6 +42,24 @@
 
   home.sessionVariables = { };
 
+  wayland.windowManager.sway = {
+    enable = true;
+    package = null;
+    config = null;
+
+    systemd.enable = false;
+
+    extraConfig = ''
+      output * bg /home/jakob/Pictures/wallpapers/rotate/a.jpeg fill
+      set $mod Mod1
+
+      include config.d/keybinds/*
+      include config.d/*
+      include /etc/sway/config.d/*
+
+      exec "${sway-autolayout}/bin/autolayout" > /tmp/autolayout.log
+    '';
+  };
 
 
   programs.home-manager.enable = true;
