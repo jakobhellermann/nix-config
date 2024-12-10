@@ -12,8 +12,13 @@
     sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
   };
 
-
-  outputs = { nixpkgs, home-manager, sway-autolayout, ... }:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      sway-autolayout,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -30,6 +35,10 @@
           };
           modules = [ ./home.nix ];
         };
+      };
+      nixosConfigurations.sipgatejj = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./configuration.nix ];
       };
     };
 }

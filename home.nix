@@ -1,4 +1,10 @@
-{ pkgs, system, inputs, lib, ... }:
+{
+  pkgs,
+  system,
+  inputs,
+  lib,
+  ...
+}:
 let
   sway-autolayout = inputs.sway-autolayout.packages.${system}.default;
 in
@@ -75,7 +81,6 @@ in
       exec "${sway-autolayout}/bin/autolayout" > /tmp/autolayout.log
     '';
   };
-
 
   programs.home-manager.enable = true;
 }
