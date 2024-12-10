@@ -3,13 +3,3 @@
 [[language]]
 name = "bash"
 file-types = [".aliases", ".env", "sh", "bash", "zsh", ".bash_login", ".bash_logout", ".bash_profile", ".bashrc", ".profile", ".zshenv", ".zlogin", ".zlogout", ".zprofile", ".zshrc", "APKBUILD", "PKGBUILD", "eclass", "ebuild", "bazelrc", ".bash_aliases"]
-
-[language.auto-pairs]
-'(' = ')'
-'[' = ']'
-'{' = '}'
-'"' = '"'
-
-[[grammar]]
-name = "typst"
-source = { git = "https://github.com/TheOnlyMrCat/tree-sitter-typst", rev = "7e96997dea0029622407994d0b9e6dbd6eae93ae" }
