@@ -42,7 +42,17 @@
       };
       nixosConfigurations.sipgatejj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
+        modules = [
+          ./system/configuration.nix
+          ./system/hardware/sipgatejj.nix
+        ];
+      };
+      nixosConfigurations.jj = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./system/configuration.nix
+          ./system/hardware/jj.nix
+        ];
       };
     };
 }
