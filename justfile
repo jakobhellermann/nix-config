@@ -6,9 +6,11 @@ update:
 
 home:
     home-manager switch --flake .
+    rehash
 
 system:
     sudo nixos-rebuild switch --flake .
+    rehash
 
 full: home system
 

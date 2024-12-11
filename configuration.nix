@@ -58,6 +58,8 @@
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   # OR
   # services.pipewire = {
   #   enable = true;
@@ -71,9 +73,9 @@
   users.users.jakob = {
     isNormalUser = true;
     initialPassword = "initial";
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      git
     ];
   };
 
@@ -82,9 +84,25 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    zsh
     git
-    vim
     curl
+    ripgrep
+    jq
+    sd
+    htop
+    eza
+    bat
+    fzf
+    skim
+    github-cli
+    graphviz
+    imagemagick
+    unzip
+    shellcheck
+    fd
+    neovim
+    helix
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -106,12 +124,28 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  environment.variables.EDITOR = "vim";
+  security.polkit.enable = true;
+  environment.variables.EDITOR = "nvim";
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
+
+  programs.sway = {
+    enable = true;
+    extraPackages = with pkgs; [
+      brightnessctl
+      foot
+      grim
+      swayidle
+      swaylock
+      wmenu
+    ];
+  };
+  programs.zsh.enable = true;
+  hardware.graphics.enable = true;
+  services.blueman.enable = true;
 
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion
   system.stateVersion = "25.05";
