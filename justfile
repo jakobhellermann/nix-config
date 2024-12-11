@@ -4,8 +4,13 @@ default:
 update:
     nix flake update
 
-hm-apply:
-    home-manager switch --flake .#jj
+home:
+    home-manager switch --flake .
+
+system:
+    sudo nixos-rebuild switch --flake .
+
+full: home system
 
 build-vm configuration="sipgatejj":
 	nix build .#nixosConfigurations.sipgatejj.config.system.build.vm
