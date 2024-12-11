@@ -33,7 +33,11 @@
               inherit sway-autolayout;
             };
           };
-          modules = [ ./home.nix ];
+          modules = [
+            ./home/home.nix
+            ./home/packages.nix
+            ./home/full.nix
+          ];
         };
       };
       nixosConfigurations.sipgatejj = nixpkgs.lib.nixosSystem {
