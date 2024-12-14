@@ -49,7 +49,6 @@ in
       # exec "${sway-autolayout}/bin/autolayout" > /tmp/autolayout.log
     '';
   };
-  services.swayosd.enable = true;
 
   programs.home-manager.enable = true;
   # programs.zsh.oh-my-zsh = {

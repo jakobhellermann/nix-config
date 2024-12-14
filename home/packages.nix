@@ -5,24 +5,35 @@
 {
 
   home.packages = with pkgs; [
-    #   firefox
-    #   bitwarden-desktop
-    #   signal-desktop
-    #   fuzzel
-    #   waybar
-    #   nixfmt-rfc-style
-    #   signal-desktop
-    #   watchexec
-    #   just
-    #   discord
-    #   spotify
-    #   vscode
-    hello
-
-    #   sway-autolayout
-
-    #   # (pkgs.writeShellScriptBin "my-hello" ''
-    #   #   echo "Hello, ${config.home.username}!"
-    #   # '')
+    firefox
+    bitwarden-desktop
+    signal-desktop
+    fuzzel
+    waybar
+    nixfmt-rfc-style
+    signal-desktop
+    watchexec
+    just
+    discord
+    spotify
+    vscode
+    nautilus
+    janet
+    jpm
+    hyperfine
+    lurk
+    clang
+    cmake
+    expect
+    go
+    jetbrains-mono
+    meson
+    mold
+    nil
+    ninja
+    python3
+    rustup
+    zed-editor
+    wl-clipboard
   ];
 }
