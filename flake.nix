@@ -46,6 +46,11 @@
           ./system/configuration.nix
           ./system/hardware/sipgatejj.nix
         ];
+        specialArgs = {
+          inputs = {
+            hostname = "sipgatejj";
+          };
+        };
       };
       nixosConfigurations.jj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -53,6 +58,11 @@
           ./system/configuration.nix
           ./system/hardware/jj.nix
         ];
+        specialArgs = {
+          inputs = {
+            hostname = "jj";
+          };
+        };
       };
     };
 }
