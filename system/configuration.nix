@@ -56,18 +56,11 @@ in
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
+  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jakob = {
@@ -75,8 +68,7 @@ in
     initialPassword = "initial";
     shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-    ];
+    packages = [ ];
   };
 
   # programs.firefox.enable = true;
@@ -84,39 +76,28 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    zsh
-    git
-    curl
-    ripgrep
-    jq
-    sd
-    htop
-    eza
     bat
+    curl
+    distrobox
+    eza
+    fd
     fzf
-    skim
+    gdb
+    git
     github-cli
     graphviz
-    imagemagick
-    unzip
-    shellcheck
-    fd
-    neovim
     helix
+    htop
+    imagemagick
+    jq
+    neovim
+    ripgrep
+    sd
+    shellcheck
+    skim
+    unzip
+    zsh
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -127,25 +108,54 @@ in
   security.polkit.enable = true;
   environment.variables.EDITOR = "nvim";
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
       brightnessctl
       foot
       grim
+      swayosd
       swayidle
       swaylock
       wmenu
     ];
   };
   programs.zsh.enable = true;
-  hardware.graphics.enable = true;
+  programs.zsh.ohMyZsh.enable = true;
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
+  # services.displayManager.autoLogin.enable = true;
+  # services.displayManager.autoLogin.user = user;
+  services.libinput.enable = true;
   services.blueman.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+  services.gnome.gnome-keyring.enable = true;
+  systemd.services.swayosd-libinput-backend = {
+    description = "SwayOSD LibInput backend for listening to certain keys like CapsLock, ScrollLock, VolumeUp, etc.";
+    documentation = [ "https://github.com/ErikReider/SwayOSD" ];
+    wantedBy = [ "graphical.target" ];
+    partOf = [ "graphical.target" ];
+    after = [ "graphical.target" ];
+
+    serviceConfig = {
+      Type = "dbus";
+      BusName = "org.erikreider.swayosd";
+      ExecStart = "${pkgs.swayosd}/bin/swayosd-libinput-backend";
+      Restart = "on-failure";
+    };
+  };
+
+  services.xserver = {
+    enable = true;
+  };
 
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion
   system.stateVersion = "25.05";
