@@ -5,7 +5,7 @@ update:
     nix flake update
 
 home:
-    home-manager switch --flake .
+    nix run nixpkgs#home-manager -- switch --flake .
 
 system:
     sudo nixos-rebuild switch --flake .
