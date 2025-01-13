@@ -7,12 +7,14 @@
 }:
 let
   sway-autolayout = inputs.sway-autolayout.packages.${system}.default;
+  username = "jakob";
+  homeDirectory = "/home/${username}";
 in
 {
   nixpkgs.config.allowUnfree = true;
 
-  home.username = "jakob";
-  home.homeDirectory = "/home/jakob";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   home.activation = {
     installDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -31,6 +33,11 @@ in
   };
 
   home.packages = [ sway-autolayout ];
+
+  systemd.user.tmpfiles.rules = [
+  	"d	${homeDirectory}/.tmp	-	-	-	-	-"
+  ]
+
 
   wayland.windowManager.sway = {
     enable = true;
