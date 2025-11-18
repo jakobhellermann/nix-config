@@ -10,6 +10,9 @@ home:
 system:
     sudo nixos-rebuild switch --flake .
 
+darwin:
+    sudo darwin-rebuild switch --flake .
+
 full: home system
 
 build-vm configuration="sipgatejj":

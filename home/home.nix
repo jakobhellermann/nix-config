@@ -1,12 +1,6 @@
-{
-  pkgs,
-  system,
-  inputs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 let
-  sway-autolayout = inputs.sway-autolayout.packages.${system}.default;
+  # sway-autolayout = inputs.sway-autolayout.packages.${system}.default;
   username = "jakob";
   homeDirectory = "/home/${username}";
 in
@@ -32,14 +26,14 @@ in
     '';
   };
 
-  home.packages = [ sway-autolayout ];
+  # home.packages = [ sway-autolayout ];
 
   systemd.user.tmpfiles.rules = [
-  	"d	${homeDirectory}/.tmp	-	-	-	-	-"
-  ]
+    "d	${homeDirectory}/.tmp	-	-	-	-	-"
+  ];
 
-
-  wayland.windowManager.sway = {
+  /*
+    wayland.windowManager.sway = {
     enable = true;
     package = null;
     config = null;
@@ -55,7 +49,8 @@ in
 
       # exec "${sway-autolayout}/bin/autolayout" > /tmp/autolayout.log
     '';
-  };
+    };
+  */
 
   programs.home-manager.enable = true;
   # programs.zsh.oh-my-zsh = {
