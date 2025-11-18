@@ -3,37 +3,24 @@
   ...
 }:
 {
-
   home.packages = with pkgs; [
-    firefox
     bitwarden-desktop
-    signal-desktop
-    fuzzel
-    waybar
-    nixfmt-rfc-style
-    signal-desktop
-    watchexec
-    just
     discord
+    firefox
+    fuzzel
+    go
+    janet
+    jetbrains-mono
+    jpm
+    lurk
+    nautilus
+    nil
+    signal-desktop
+    signal-desktop
     spotify
     vscode
-    nautilus
-    janet
-    jpm
-    hyperfine
-    lurk
-    clang
-    cmake
-    expect
-    go
-    jetbrains-mono
-    meson
-    mold
-    nil
-    ninja
-    python3
-    rustup
-    zed-editor
+    waybar
     wl-clipboard
+    zed-editor
   ];
 }
