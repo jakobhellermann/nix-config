@@ -4,39 +4,49 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
+    # sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
   };
 
   outputs =
     {
       nixpkgs,
       home-manager,
-      sway-autolayout,
+      nix-darwin,
+      # sway-autolayout,
       ...
     }:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      # pkgs = import nixpkgs { inherit system; };
     in
     {
       homeConfigurations = {
         jakob = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit system;
-            inputs = {
-              inherit sway-autolayout;
-            };
-          };
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             ./home/home.nix
             ./home/packages.nix
             ./home/full.nix
+          ];
+        };
+        sipgatejj = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          modules = [
+            {
+              home.username = "sipgatejj";
+              home.homeDirectory = "/Users/sipgatejj";
+            }
+            ./home/shared.nix
+            ./home/macos.nix
           ];
         };
       };
@@ -63,6 +73,9 @@
             hostname = "jj";
           };
         };
+      };
+      darwinConfigurations."sipgatejj-macos" = nix-darwin.lib.darwinSystem {
+        modules = [ ./macos/macos.nix ];
       };
     };
 }
