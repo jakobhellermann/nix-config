@@ -53,8 +53,8 @@
       nixosConfigurations.sipgatejj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./system/configuration.nix
-          ./system/hardware/sipgatejj.nix
+          ./nixos/configuration.nix
+          ./nixos/hardware/sipgatejj.nix
         ];
         specialArgs = {
           inputs = {
@@ -65,8 +65,8 @@
       nixosConfigurations.jj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./system/configuration.nix
-          ./system/hardware/jj.nix
+          ./nixos/configuration.nix
+          ./nixos/hardware/jj.nix
         ];
         specialArgs = {
           inputs = {
@@ -75,7 +75,7 @@
         };
       };
       darwinConfigurations."sipgatejj-macos" = nix-darwin.lib.darwinSystem {
-        modules = [ ./macos/macos.nix ];
+        modules = [ ./darwin/macos.nix ];
       };
     };
 }
