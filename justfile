@@ -4,16 +4,14 @@ default:
 update:
     nix flake update
 
-home:
-    nix run nixpkgs#home-manager -- switch --flake .
-
-system:
+nixos:
     sudo nixos-rebuild switch --flake .
 
 darwin:
     sudo darwin-rebuild switch --flake .
 
-full: home system
+home:
+    nix run nixpkgs#home-manager -- switch --flake .
 
 build-vm configuration="sipgatejj":
 	nix build .#nixosConfigurations.sipgatejj.config.system.build.vm
