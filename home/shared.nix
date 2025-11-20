@@ -28,9 +28,14 @@
   home.packages = with pkgs; [
     clang
     cmake
+    comma
+    dust
     expect
     eza
+    fd
+    fzf
     gh
+    nvd
     go
     hyperfine
     jujutsu

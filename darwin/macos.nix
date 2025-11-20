@@ -38,7 +38,12 @@ in
     "raycast"
   ];
 
-  system.defaults.CustomUserPreferences = {
+  system.defaults = {
+    NSGlobalDomain."com.apple.mouse.tapBehavior" = 1; # tap to click
+    WindowManager.EnableStandardClickToShowDesktop = false;
+    dock.show-recents = false;
+
+    CustomUserPreferences = { };
   };
 
   # Set Git commit hash for darwin-version.
