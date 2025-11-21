@@ -21,3 +21,6 @@ run-vm configuration="sipgatejj": build-vm
 
 build-iso:
 	nix build .#nixosConfigurations.live.config.system.build.isoImage
+
+diff:
+    @unbuffer dix $(home-manager generations | head -n2 | cut -d' ' -f7 | tac) | tail -n +3
