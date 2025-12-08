@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ];
   programs.home-manager.enable = true;
 
   home.activation = {
@@ -26,6 +27,7 @@
   programs.git.enable = true;
 
   home.packages = with pkgs; [
+    claude-code
     clang
     cmake
     comma
