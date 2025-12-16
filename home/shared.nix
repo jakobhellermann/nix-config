@@ -1,8 +1,8 @@
 { lib, pkgs, ... }:
 {
-  # nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ];
-  programs.home-manager.enable = true;
+  imports = [
+    ./packages/base.nix
+  ];
 
   home.activation = {
     installDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -23,41 +23,6 @@
       fi
     '';
   };
-
-  programs.git.enable = true;
-
-  home.packages = with pkgs; [
-    claude-code
-    clang
-    cmake
-    comma
-    dix
-    dust
-    expect
-    eza
-    fd
-    fzf
-    gh
-    go
-    helix
-    hyperfine
-    jujutsu
-    just
-    mergiraf
-    meson
-    mold
-    neovim
-    ninja
-    nix-tree
-    nixd
-    nixfmt-rfc-style
-    nvd
-    python3
-    ripgrep
-    rustup
-    tokei
-    watchexec
-  ];
 
   home.stateVersion = "24.11";
 }

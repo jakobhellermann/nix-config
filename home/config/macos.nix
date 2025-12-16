@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./modules/dock
+    ../shared.nix
+    ../modules/dock
   ];
   home.packages = with pkgs; [
     uutils-coreutils-noprefix
@@ -22,6 +23,5 @@
         section = "others";
       }
     ];
-
   };
 }
