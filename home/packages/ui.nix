@@ -1,26 +1,14 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     bitwarden-desktop
     discord
     firefox
     fuzzel
-    go
-    janet
     jetbrains-mono
-    jpm
-    lurk
-    nautilus
-    nil
-    signal-desktop
     signal-desktop
     spotify
     vscode
-    waybar
-    wl-clipboard
     zed-editor
   ];
 }
