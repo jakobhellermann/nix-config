@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  imports = [
+    ../shared.nix
+    ../packages/ui.nix
+  ];
+
   home.packages = with pkgs; [ dconf ];
 
   dconf = {
@@ -12,10 +17,6 @@
   };
   gtk = {
     enable = true;
-    # theme = {
-    #   name = "orchis-theme";
-    #   package = pkgs.orchis-theme;
-    # };
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
