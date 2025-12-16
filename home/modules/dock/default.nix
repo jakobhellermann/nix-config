@@ -87,7 +87,7 @@ in
           ${dockutil}/bin/dockutil --no-restart --remove all
           ${createEntries}
 
-          /usr/bin/killall Dock
+          # /usr/bin/killall Dock
         else
           echo >&2 "Dock setup complete."
         fi
