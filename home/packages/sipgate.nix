@@ -5,6 +5,7 @@
     colima
     krew
     ktfmt
+    kubectl
     kubelogin
     maven
     postgresql

@@ -2,15 +2,19 @@
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ];
   home.packages = with pkgs; [
+    bun
     clang
     claude-code
     cmake
     comma
     dix
+    docker
     dust
     expect
     eza
     fd
+    fish-lsp
+    fnm
     fzf
     gh
     go
@@ -18,6 +22,8 @@
     hyperfine
     jujutsu
     just
+    lemminx
+    lua-language-server
     mergiraf
     meson
     mold
@@ -27,10 +33,16 @@
     nixd
     nixfmt-rfc-style
     nvd
+    pnpm
     python3
     ripgrep
     rustup
+    shellcheck
+    skim
+    taplo
     tokei
+    uv
+    vtsls
     watchexec
   ];
 }
