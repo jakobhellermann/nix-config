@@ -23,4 +23,4 @@ build-iso:
 	nix build .#nixosConfigurations.live.config.system.build.isoImage
 
 diff:
-    @unbuffer dix $(home-manager generations | head -n2 | cut -d' ' -f7 | tac) | tail -n +3
+    @unbuffer dix $(nix run nixpkgs#home-manager generations | head -n2 | cut -d' ' -f7 | tac) | tail -n +3
