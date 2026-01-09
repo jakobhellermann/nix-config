@@ -22,6 +22,7 @@
     helix
     hicolor-icon-theme
     hyperfine
+    jjui
     jujutsu
     just
     lemminx
@@ -37,6 +38,7 @@
     nixfmt-rfc-style
     nvd
     pnpm
+    poppler-utils
     python3
     ripgrep
     rustup
