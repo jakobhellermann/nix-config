@@ -32,7 +32,7 @@
     ninja
     nix-tree
     nixd
-    nixfmt-rfc-style
+    nixfmt
     nvd
     pnpm
     poppler-utils
