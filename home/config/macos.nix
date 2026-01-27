@@ -6,11 +6,11 @@
   ];
   home.packages = with pkgs; [
     uutils-coreutils-noprefix
-    dockutil
+    # dockutil
   ];
 
   local = {
-    dock.enable = true;
+    dock.enable = false;
     dock.entries = [
       { path = "/Applications/Zen.app"; }
       { path = "/Applications/Discord.app"; }
