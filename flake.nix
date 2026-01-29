@@ -45,6 +45,16 @@
             ./home/packages/sipgate.nix
           ];
         };
+        asahijj = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-linux";
+          modules = [
+            {
+              home.username = "jakob";
+              home.homeDirectory = "/home/jakob";
+            }
+            ./home/config/asahi.nix
+          ];
+        };
       };
       nixosConfigurations.sipgatejj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
