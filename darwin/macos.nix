@@ -7,7 +7,13 @@ let
 in
 {
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.trusted-users = [
+    "root"
+    user
+  ];
   nix.settings.warn-dirty = false;
+
+  nix.linux-builder.enable = true;
 
   system.primaryUser = user;
   users.users.${user} = {
@@ -30,11 +36,14 @@ in
   ];
 
   homebrew.enable = true;
+  homebrew.brews = [
+    "colima"
+  ];
   homebrew.casks = [
     "discord"
     "ghostty"
     "swift-shift"
-    "zed"
+    "zed@preview"
     "zen"
     "raycast"
   ];
@@ -45,6 +54,26 @@ in
     dock.show-recents = false;
 
     CustomUserPreferences = { };
+  };
+
+  services.skhd = {
+    enable = true;
+    skhdConfig =
+      let
+        toggleTelephone = pkgs.writeScript "toggle-telephone" ''
+          #!/usr/bin/osascript
+          tell application "System Events"
+            if frontmost of process "Telephone" then
+              set visible of process "Telephone" to false
+            else
+              tell application "Telephone" to activate
+            end if
+          end tell
+        '';
+      in
+      ''
+        cmd + alt - t : ${toggleTelephone}
+      '';
   };
 
   # Set Git commit hash for darwin-version.
