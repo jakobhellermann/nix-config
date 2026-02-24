@@ -1,13 +1,13 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    # ktfmt
     ansible
-    colima
     krew
-    ktfmt
     kubectl
     kubelogin
     maven
     postgresql
+    slack
   ];
 }
