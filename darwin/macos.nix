@@ -7,6 +7,7 @@ let
 in
 {
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.warn-dirty = false;
 
   system.primaryUser = user;
   users.users.${user} = {
