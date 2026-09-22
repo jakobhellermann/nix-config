@@ -3,6 +3,7 @@ let
   systemDependentPackages = with pkgs; [
     discord
     spotify
+    wl-clipboard
   ];
 in
 {
@@ -11,12 +12,25 @@ in
   home.packages =
     with pkgs;
     [
+      awww
       bitwarden-desktop
+      brightnessctl
       firefox
+      foot
       fuzzel
+      fyi
+      gale
+      ghostty
       jetbrains-mono
       jetbrains.idea
+      jetbrains.rider
+      mangohud
+      playerctl
       signal-desktop
+      swayosd
+      vesktop
+      vicinae
+      waybar
       zed-editor
     ]
     ++ builtins.filter (pkg: lib.meta.availableOn pkgs.stdenv.hostPlatform pkg) systemDependentPackages;
