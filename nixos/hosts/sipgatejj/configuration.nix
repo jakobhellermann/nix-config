@@ -8,6 +8,8 @@
     ./disko.nix
   ];
 
+  security.pki.certificateFiles = [ ./sipgate-ca-root_2018-06-01.crt ];
+
   networking.hostName = "sipgatejj";
 
   users.users.sipgatejj = {
