@@ -4,6 +4,7 @@
     ../../shared.nix
     ../../modules/niri.nix
     ./hardware.nix
+    ./vpn.nix
     ./disko.nix
   ];
 
