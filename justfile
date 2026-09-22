@@ -13,6 +13,9 @@ darwin:
 home:
     nix run nixpkgs#home-manager -- switch --flake .
 
+agenix name:
+    @cd secrets && nix run github:ryantm/agenix -- -e "{{ name }}.age"
+
 provision host configuration:
     nix run github:nix-community/nixos-anywhere -- --flake .#{{ configuration }} {{ host }}
 
