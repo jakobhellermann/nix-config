@@ -30,6 +30,9 @@
     "xe.enable_panel_replay=0"
   ];
 
+  # latest kernel https://github.com/NixOS/nixos-hardware/pull/1912/files
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
