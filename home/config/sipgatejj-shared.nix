@@ -288,6 +288,7 @@ in
   imports = [
     ../shared.nix
     ../modules/ringo
+    ../modules/agenix.nix
   ];
   home.packages = with pkgs; [
     uutils-coreutils-noprefix
