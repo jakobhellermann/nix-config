@@ -37,6 +37,7 @@
     nixfmt
     nvd
     # pnpm
+    pi-coding-agent
     poppler-utils
     python3
     ripgrep
