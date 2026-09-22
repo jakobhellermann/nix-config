@@ -17,7 +17,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
+
+  services.resolved.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
