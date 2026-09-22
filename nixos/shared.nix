@@ -45,6 +45,9 @@
   security.polkit.enable = true;
   environment.variables.EDITOR = "nvim";
 
+  environment.sessionVariables.PKG_CONFIG_PATH =
+    "$HOME/.nix-profile/lib/pkgconfig:" + "$HOME/.nix-profile/share/pkgconfig";
+
   programs.fish.enable = true;
 
   services.openssh = {
