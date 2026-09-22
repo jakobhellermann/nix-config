@@ -10,8 +10,8 @@ nixos:
 darwin:
     sudo darwin-rebuild switch --flake .
 
-home:
-    nix run nixpkgs#home-manager -- switch --flake .
+home profile=`whoami`:
+    nix run nixpkgs#home-manager -- switch --flake .#{{ profile }}
 
 agenix name:
     @cd secrets && nix run github:ryantm/agenix -- -e "{{ name }}.age"
