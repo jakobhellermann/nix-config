@@ -18,6 +18,7 @@
   nix.channel.enable = false;
 
   # Use the systemd-boot EFI boot loader.
+  boot.loader.timeout = 1;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.tmp.useTmpfs = true;
