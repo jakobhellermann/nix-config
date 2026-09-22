@@ -2,6 +2,7 @@
 {
   imports = [
     ../../shared.nix
+    ../../modules/steam.nix
     ./hardware.nix
   ];
 
