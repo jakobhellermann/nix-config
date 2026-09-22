@@ -15,7 +15,6 @@ in
       awww
       bitwarden-desktop
       brightnessctl
-      firefox
       foot
       fuzzel
       fyi
