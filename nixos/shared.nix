@@ -2,6 +2,7 @@
 {
   imports = [
     ./modules/ssh-keys.nix
+    ./modules/tailscale.nix
     ./packages.nix
   ];
 
