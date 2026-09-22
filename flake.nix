@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
   };
 
@@ -28,6 +33,7 @@
       home-manager,
       nix-darwin,
       disko,
+      agenix,
       ...
     }:
     let
@@ -65,12 +71,14 @@
         system = "x86_64-linux";
         modules = [
           disko.nixosModules.disko
+          agenix.nixosModules.default
           ./nixos/hosts/sipgatejj/configuration.nix
         ];
       };
       nixosConfigurations.jj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          agenix.nixosModules.default
           ./nixos/hosts/jj/configuration.nix
         ];
       };
