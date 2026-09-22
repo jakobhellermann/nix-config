@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, ... }@args:
 let
   systemDependentPackages = with pkgs; [
     discord
@@ -31,6 +31,7 @@ in
       vicinae
       waybar
       zed-editor
+      (import ./build/cogfly.nix args)
     ]
     ++ builtins.filter (pkg: lib.meta.availableOn pkgs.stdenv.hostPlatform pkg) systemDependentPackages;
 }
