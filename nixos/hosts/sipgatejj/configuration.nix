@@ -16,7 +16,10 @@
     isNormalUser = true;
     initialPassword = "initial";
     shell = pkgs.fish;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel"
+      "video"
+    ];
     openssh.authorizedKeys.keys = config.my.sshKeys;
   };
 }
