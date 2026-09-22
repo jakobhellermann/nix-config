@@ -2,6 +2,7 @@
   imports = [
     ./sipgatejj-shared.nix
     ../modules/firefox
+    ../modules/dev.nix
     ../packages/ui.nix
     ../packages/sipgate.nix
   ];
