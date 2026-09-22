@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
   };
 
@@ -22,7 +27,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
-      # sway-autolayout,
+      disko,
       ...
     }:
     let
@@ -59,29 +64,21 @@
       nixosConfigurations.sipgatejj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./nixos/configuration.nix
-          ./nixos/hardware/sipgatejj.nix
+          disko.nixosModules.disko
+          ./nixos/hosts/sipgatejj/configuration.nix
         ];
-        specialArgs = {
-          inputs = {
-            hostname = "sipgatejj";
-          };
-        };
       };
       nixosConfigurations.jj = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./nixos/configuration.nix
-          ./nixos/hardware/jj.nix
+          ./nixos/hosts/jj/configuration.nix
         ];
-        specialArgs = {
-          inputs = {
-            hostname = "jj";
-          };
-        };
       };
       darwinConfigurations."sipgatejj-macos" = nix-darwin.lib.darwinSystem {
-        modules = [ ./darwin/macos.nix ];
+        modules = [
+          ./darwin/macos.nix
+        ];
       };
+
     };
 }
