@@ -1,6 +1,7 @@
 {
   imports = [
     ./sipgatejj-shared.nix
+    ../modules/firefox
     ../packages/ui.nix
     ../packages/sipgate.nix
   ];
