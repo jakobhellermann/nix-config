@@ -2,6 +2,7 @@
 {
   imports = [
     ../../shared.nix
+    ../../modules/niri.nix
     ./hardware.nix
     ./disko.nix
   ];
