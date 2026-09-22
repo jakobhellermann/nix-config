@@ -3,12 +3,17 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ];
   home.packages = with pkgs; [
     # bun
-    clang
     # claude-code
+    # docker
+    bat
+    clang
     cmake
     comma
-    # dix
-    # docker
+    direnv
+    dix
+    docker-compose
+    dotnet-sdk_11
+    dtrx
     dust
     expect
     eza
@@ -22,8 +27,9 @@
     helix
     hicolor-icon-theme
     hyperfine
+    ilspycmd
+    inotify-tools
     jjui
-    # jujutsu
     just
     lemminx
     libsecret
@@ -33,13 +39,20 @@
     mold
     neovim
     ninja
+    nix-index
     nix-tree
     nixd
     nixfmt
+    nodejs
+    nono
     nvd
-    # pnpm
+    oxfmt
+    p7zip
     pi-coding-agent
+    pkg-config
+    pnpm
     poppler-utils
+    prettier
     python3
     ripgrep
     rustup
@@ -47,9 +60,15 @@
     shfmt
     skim
     taplo
+    tldr
     tokei
+    tree-sitter
+    unzip
     uv
     vtsls
-    # watchexec
+    watchexec
+    wtype
+    yq
+    (lib.hiPrio wild) # conflict with clang on ld, clang has prio 10
   ];
 }

@@ -12,5 +12,8 @@
     ];
   };
 
+  # Backlight write access for brightnessctl
+  services.udev.packages = [ pkgs.brightnessctl ];
+
   services.speechd.enable = lib.mkOverride 1200 false;
 }
