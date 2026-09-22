@@ -8,7 +8,7 @@
     cmake
     comma
     # dix
-    docker
+    # docker
     dust
     expect
     eza

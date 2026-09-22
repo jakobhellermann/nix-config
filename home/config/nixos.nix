@@ -2,38 +2,38 @@
 {
   imports = [
     ../shared.nix
-    ../packages/ui.nix
+    # ../packages/ui.nix
   ];
 
   home.packages = with pkgs; [ dconf ];
 
-  dconf = {
-    enable = true;
-    settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-    };
-  };
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-    cursorTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings = {
+  #     "org/gnome/desktop/interface" = {
+  #       color-scheme = "prefer-dark";
+  #     };
+  #   };
+  # };
+  # gtk = {
+  #   enable = true;
+  #   iconTheme = {
+  #     name = "Adwaita";
+  #     package = pkgs.adwaita-icon-theme;
+  #   };
+  #   cursorTheme = {
+  #     name = "Adwaita";
+  #     package = pkgs.adwaita-icon-theme;
+  #   };
+  # };
 
-  home.sessionVariables = rec {
-    JANET_TREE = "$HOME/.local/jpm_tree";
-    JANET_HEADERPATH = "${pkgs.janet}/include/janet";
-    JANET_PATH = "${JANET_TREE}/lib";
-    JANET_LIBPATH = "${pkgs.janet}/lib";
-  };
-  home.sessionPath = [ "$HOME/.local/jpm_tree/bin" ];
+  # home.sessionVariables = rec {
+  #   JANET_TREE = "$HOME/.local/jpm_tree";
+  #   JANET_HEADERPATH = "${pkgs.janet}/include/janet";
+  #   JANET_PATH = "${JANET_TREE}/lib";
+  #   JANET_LIBPATH = "${pkgs.janet}/lib";
+  # };
+  # home.sessionPath = [ "$HOME/.local/jpm_tree/bin" ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.11";
 }
