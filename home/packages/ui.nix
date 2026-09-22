@@ -11,11 +11,11 @@ in
   home.packages =
     with pkgs;
     [
-      jetbrains.idea
       bitwarden-desktop
       firefox
       fuzzel
       jetbrains-mono
+      jetbrains.idea
       signal-desktop
       zed-editor
     ]
