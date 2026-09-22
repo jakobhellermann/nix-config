@@ -30,8 +30,14 @@
     "xe.enable_panel_replay=0"
   ];
 
-  # latest kernel https://github.com/NixOS/nixos-hardware/pull/1912/files
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # kernel 7.3-rc needed for CS35L57 speaker fix (spk-id-gpios EBUSY, thesofproject/sof#11152)
+  boot.kernelPackages = pkgs.linuxPackages_testing;
+  assertions = [
+    {
+      assertion = lib.versionOlder pkgs.linuxPackages_latest.kernel.version "7.3";
+      message = "linuxPackages_latest is now 7.3+: switch boot.kernelPackages from linuxPackages_testing back to linuxPackages_latest and remove this assertion";
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
