@@ -9,6 +9,7 @@ let
   # system_<hostname> = "ssh-ed25519 AAAA... root@<hostname>";
 
   names = [
+    "user-env"
   ];
 in
 builtins.listToAttrs (

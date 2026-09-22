@@ -48,6 +48,7 @@
         sipgatejj = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
+            agenix.homeManagerModules.default
             {
               home.username = "sipgatejj";
               home.homeDirectory = "/home/sipgatejj";
@@ -59,6 +60,7 @@
         sipgatejj-mac = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
+            agenix.homeManagerModules.default
             {
               home.username = "sipgatejj";
               home.homeDirectory = "/Users/sipgatejj";
