@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
-  imports = [ ./modules/ssh-keys.nix ];
+  imports = [
+    ./modules/ssh-keys.nix
+    ./packages.nix
+  ];
 
   nixpkgs = {
     config.allowUnfree = true;
