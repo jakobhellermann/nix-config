@@ -17,7 +17,6 @@ in
       fuzzel
       jetbrains-mono
       signal-desktop
-      vscode
       zed-editor
     ]
     ++ builtins.filter (pkg: lib.meta.availableOn pkgs.stdenv.hostPlatform pkg) systemDependentPackages;

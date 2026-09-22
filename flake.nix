@@ -46,14 +46,24 @@
           modules = [ ./home/config/nixos.nix ];
         };
         sipgatejj = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [
+            {
+              home.username = "sipgatejj";
+              home.homeDirectory = "/home/sipgatejj";
+              home.stateVersion = "26.11";
+            }
+            ./home/config/sipgatejj.nix
+          ];
+        };
+        sipgatejj-mac = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             {
               home.username = "sipgatejj";
               home.homeDirectory = "/Users/sipgatejj";
             }
-            ./home/config/macos.nix
-            ./home/packages/sipgate.nix
+            ./home/config/sipgatejj-mac.nix
           ];
         };
         asahijj = home-manager.lib.homeManagerConfiguration {

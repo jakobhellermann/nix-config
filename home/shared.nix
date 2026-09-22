@@ -24,5 +24,5 @@
     '';
   };
 
-  home.stateVersion = "24.11";
+  home.stateVersion = lib.mkDefault "24.11";
 }
