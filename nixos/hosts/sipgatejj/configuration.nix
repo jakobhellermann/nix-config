@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../../shared.nix
@@ -13,5 +13,6 @@
     initialPassword = "initial";
     shell = pkgs.fish;
     extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = config.my.sshKeys;
   };
 }

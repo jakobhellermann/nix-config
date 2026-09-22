@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
+  imports = [ ./modules/ssh-keys.nix ];
+
   nixpkgs = {
     config.allowUnfree = true;
   };
@@ -34,6 +36,11 @@
   environment.variables.EDITOR = "nvim";
 
   programs.fish.enable = true;
+
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
 
   virtualisation.podman = {
     enable = true;
