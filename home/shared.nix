@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
   imports = [
+    ./modules/xdg.nix
     ./packages/base.nix
   ];
 
