@@ -3,6 +3,7 @@
     ./sipgatejj-shared.nix
     ../modules/firefox
     ../modules/dev.nix
+    ../packages/base.nix
     ../packages/ui.nix
     ../packages/sipgate.nix
     ../packages/flakes.nix
