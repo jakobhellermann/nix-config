@@ -25,6 +25,11 @@
     };
 
     # sway-autolayout.url = "github:jakobhellermann/janet-swayipc/nix";
+
+    niri-fork = {
+      url = "github:jakobhellermann/niri/dev";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,6 +39,7 @@
       nix-darwin,
       disko,
       agenix,
+      niri-fork,
       ...
     }:
     let
@@ -84,6 +90,9 @@
         modules = [
           disko.nixosModules.disko
           agenix.nixosModules.default
+          {
+            programs.niri.package = niri-fork.packages.x86_64-linux.niri;
+          }
           ./nixos/hosts/sipgatejj/configuration.nix
         ];
       };
