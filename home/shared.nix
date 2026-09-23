@@ -1,8 +1,8 @@
 { lib, pkgs, ... }:
 {
   imports = [
+    ./modules/agenix.nix
     ./modules/xdg.nix
-    ./packages/base.nix
   ];
 
   home.activation = {

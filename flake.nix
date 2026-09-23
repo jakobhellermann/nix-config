@@ -53,6 +53,18 @@
     in
     {
       homeConfigurations = {
+        minimal = home-manager.lib.homeManagerConfiguration {
+          inherit extraSpecialArgs;
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [
+            agenix.homeManagerModules.default
+            ./home/config/minimal.nix
+            {
+              home.username = "jakob";
+              home.homeDirectory = "/home/jakob";
+            }
+          ];
+        };
         jakob = home-manager.lib.homeManagerConfiguration {
           inherit extraSpecialArgs;
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
