@@ -30,10 +30,15 @@
       url = "github:jakobhellermann/niri/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    diffpatch = {
+      url = "github:jakobhellermann/diffpatch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       home-manager,
       nix-darwin,
@@ -44,14 +49,17 @@
     }:
     let
       # pkgs = import nixpkgs { inherit system; };
+      extraSpecialArgs = { inherit inputs; };
     in
     {
       homeConfigurations = {
         jakob = home-manager.lib.homeManagerConfiguration {
+          inherit extraSpecialArgs;
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [ ./home/config/nixos.nix ];
         };
         sipgatejj = home-manager.lib.homeManagerConfiguration {
+          inherit extraSpecialArgs;
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             agenix.homeManagerModules.default
@@ -64,6 +72,7 @@
           ];
         };
         sipgatejj-mac = home-manager.lib.homeManagerConfiguration {
+          inherit extraSpecialArgs;
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             agenix.homeManagerModules.default
@@ -75,6 +84,7 @@
           ];
         };
         asahijj = home-manager.lib.homeManagerConfiguration {
+          inherit extraSpecialArgs;
           pkgs = nixpkgs.legacyPackages."aarch64-linux";
           modules = [
             {
