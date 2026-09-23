@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./modules/ssh-keys.nix
@@ -61,6 +61,12 @@
     dockerCompat = true;
   };
   virtualisation.containers.containersConf.settings.engine.compose_warning_logs = false;
+
+  fonts.packages = with pkgs; [
+    inter
+    recursive
+  ];
+  fonts.fontconfig.defaultFonts.sansSerif = [ "Inter" ];
 
   security.pam.services.sudo.nodelay = true;
 
