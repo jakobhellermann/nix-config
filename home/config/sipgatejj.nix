@@ -5,6 +5,7 @@
     ../modules/dev.nix
     ../packages/ui.nix
     ../packages/sipgate.nix
+    ../packages/flakes.nix
   ];
 
   programs.vicinae = {
