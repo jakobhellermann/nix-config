@@ -1,0 +1,43 @@
+--- a/sound/soc/codecs/cs35l56-shared.c	2026-09-23 11:41:48.782230200 +0200
++++ b/sound/soc/codecs/cs35l56-shared.c	2026-09-23 11:41:48.786290183 +0200
+@@ -1555,6 +1555,20 @@
+ 		return -ENOENT;
+ 	} else if (IS_ERR(descs)) {
+ 		ret = PTR_ERR(descs);
++
++		/*
++		 * If the spk-id GPIO is claimed exclusively by another driver
++		 * (e.g. another of the amps probing in parallel, both wired to
++		 * the same GPIO in ACPI), the lookup returns -EBUSY. The speaker
++		 * ID only selects tuning data, so carry on without it instead
++		 * of failing the probe. Mirrors the shared reset GPIO handling.
++		 */
++		if (ret == -EBUSY) {
++			dev_info(cs35l56_base->dev,
++				 "spk-id GPIO busy, continuing without speaker ID\n");
++			return -ENOENT;
++		}
++
+ 		return dev_err_probe(cs35l56_base->dev, ret, "Failed to get spk-id-gpios\n");
+ 	}
+ 
+--- a/sound/soc/codecs/cs35l56.c	2026-09-23 11:41:48.781290168 +0200
++++ b/sound/soc/codecs/cs35l56.c	2026-09-23 11:41:48.787294506 +0200
+@@ -1923,6 +1923,17 @@
+ 	if (IS_ERR(desc)) {
+ 		fwnode_handle_put(af01_fwnode);
+ 		ret = PTR_ERR(desc);
++
++		/*
++		 * GPIO is claimed exclusively by another driver; carry on
++		 * without the speaker ID instead of failing the probe.
++		 */
++		if (ret == -EBUSY) {
++			dev_info(cs35l56->base.dev,
++				 "spk-id GPIO busy, continuing without speaker ID\n");
++			return -ENOENT;
++		}
++
+ 		return dev_err_probe(cs35l56->base.dev, ret, "Get GPIO from AF01 failed\n");
+ 	}
+ 
