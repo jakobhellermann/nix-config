@@ -10,6 +10,7 @@ let
 
   names = [
     "user-env"
+    "github-nix"
   ];
 in
 builtins.listToAttrs (
