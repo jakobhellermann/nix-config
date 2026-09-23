@@ -20,7 +20,17 @@
   ];
   boot.initrd.kernelModules = [ "xe" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+
+  # CS35L56 spk-id-gpios EBUSY: all four SoundWire amps reference the same
+  # host GPIO in ACPI; a competing exclusive claim makes gpiod_get_array_optional()
+  # return -EBUSY and the driver treats that as fatal, so no ALSA card is
+  # registered at all (dummy output in wpctl). Patched replacement modules make
+  # the driver tolerate -EBUSY and continue without the speaker ID, exactly
+  # like it already does for the shared reset GPIO. Still broken in v7.3-rc4;
+  # no fix queued upstream. See cs35l56-ebusy-fix/ and thesofproject/sof#11152.
+  boot.extraModulePackages = [
+    (config.boot.kernelPackages.callPackage ./cs35l56-ebusy-fix { })
+  ];
 
   # Panel Replay/Self-Refresh on the internal display causes noticeable input latency
   # Trade-off: slightly higher idle power draw.
