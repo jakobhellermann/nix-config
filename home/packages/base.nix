@@ -6,6 +6,7 @@
     # claude-code
     # docker
     bat
+    bitwarden-cli
     clang
     cmake
     comma

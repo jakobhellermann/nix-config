@@ -3,6 +3,7 @@
   imports = [
     ../../shared.nix
     ../../modules/niri.nix
+    ../../modules/noctalia.nix
     ../../modules/steam.nix
     ./hardware.nix
     ./vpn.nix

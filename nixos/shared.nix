@@ -64,7 +64,7 @@
   security.pam.services.sudo.nodelay = true;
 
   services.libinput.enable = true;
-  services.blueman.enable = true;
+  # services.blueman.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
