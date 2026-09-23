@@ -2,7 +2,12 @@
 {
   programs.niri.enable = true;
 
-  environment.systemPackages = [ pkgs.xwayland-satellite ];
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+  };
+
+  environment.systemPackages = with pkgs; [ xwayland-satellite ];
 
   xdg.portal = {
     enable = true;
