@@ -30,3 +30,24 @@ build-iso:
 
 diff:
     @unbuffer dix $(nix run nixpkgs#home-manager generations | head -n2 | cut -d' ' -f7 | tac) | tail -n +3
+
+preview-home inputs="nixpkgs": (_preview "homeConfigurations.$(whoami).activationPackage" '$HOME/.local/state/nix/profiles/home-manager' inputs)
+
+preview-nixos inputs="nixpkgs": (_preview "nixosConfigurations.$(hostname).config.system.build.toplevel" "/run/current-system" inputs)
+
+[private]
+_preview attr old inputs="nixpkgs":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tmp=$(mktemp -d)
+    trap 'rm -rf "$tmp"' EXIT
+    rsync -a --exclude .git --exclude result ./ "$tmp/"
+    cd "$tmp"
+    if [ "{{ inputs }}" = all ]; then
+        nix flake update
+    else
+        nix flake update {{ inputs }}
+    fi
+    old=$(readlink -f {{ old }})
+    new=$(nix build ".#{{ attr }}" --no-link --print-out-paths)
+    nix run nixpkgs#dix -- "$old" "$new"
