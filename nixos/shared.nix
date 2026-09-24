@@ -60,6 +60,7 @@
     enable = true;
     dockerCompat = true;
   };
+  virtualisation.containers.containersConf.settings.engine.compose_warning_logs = false;
 
   security.pam.services.sudo.nodelay = true;
 
