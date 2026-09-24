@@ -7,6 +7,11 @@
     # docker
     bat
     bitwarden-cli
+    cargo-hack
+    cargo-insta
+    cargo-nextest
+    cargo-outdated
+    cargo-watch
     clang
     cmake
     comma
