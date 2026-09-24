@@ -40,6 +40,12 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # XPS 14 DA14260 hardware profile (IPU7 webcam); unmerged upstream PR
+    nixos-hardware = {
+      url = "github:cooparo/nixos-hardware/dell-xps-14-da14260";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -117,6 +123,7 @@
         modules = [
           disko.nixosModules.disko
           agenix.nixosModules.default
+          inputs.nixos-hardware.nixosModules.dell-xps-14-da14260
           {
             programs.niri.package = niri-fork.packages.x86_64-linux.niri;
           }
