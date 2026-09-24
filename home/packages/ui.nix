@@ -9,13 +9,17 @@ in
 {
   nixpkgs.config.allowUnfree = true;
 
+  programs.foot = {
+    enable = true;
+    server.enable = true;
+  };
+
   home.packages =
     with pkgs;
     [
       awww
       bitwarden-desktop
       brightnessctl
-      foot
       fuzzel
       fyi
       gale
