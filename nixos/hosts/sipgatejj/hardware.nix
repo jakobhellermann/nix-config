@@ -30,7 +30,23 @@
   # no fix queued upstream. See cs35l56-ebusy-fix/ and thesofproject/sof#11152.
   boot.extraModulePackages = [
     (config.boot.kernelPackages.callPackage ./cs35l56-ebusy-fix { })
+
+    # intel_cvs (SVP7500 camera bridge) creates no /dev/v4l-subdev* for the
+    # sensor: the isys notifier never completes because the HM1092 IR sensor
+    # (ipu-bridge table entry since 7.3) has no driver, and subdev nodes are
+    # only registered at notifier completion. Patched module registers them
+    # at sensor bind time. See intel-cvs-subdev-fix/.
+    (config.boot.kernelPackages.callPackage ./intel-cvs-subdev-fix { })
   ];
+
+  # The raw IPU7 ISYS capture nodes (~32, unrenderable Bayer) sit on
+  # /dev/video0 and up. Apps (Discord, Firefox) pick the first one as their
+  # default camera and hold it open, which blocks the camera HAL from using
+  # its own capture node. Root-only: apps cannot open or list them anymore,
+  # the relay service (as root) keeps access.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="video4linux", ATTR{name}=="Intel IPU7 ISYS Capture*", MODE="0600"
+  '';
 
   # Panel Replay/Self-Refresh on the internal display causes noticeable input latency
   # Trade-off: slightly higher idle power draw.
