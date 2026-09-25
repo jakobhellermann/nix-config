@@ -13,6 +13,8 @@
       '';
       extraPolicies = (import ../modules/firefox/policies.nix) // {
         DisableAppUpdate = true;
+        # zen ships its own NSS, so it doesn't see the system CA bundle
+        Certificates.Install = [ "${../../nixos/hosts/sipgatejj/sipgate-ca-root_2018-06-01.crt}" ];
       };
     })
   ];
