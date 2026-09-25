@@ -44,9 +44,20 @@
   # default camera and hold it open, which blocks the camera HAL from using
   # its own capture node. Root-only: apps cannot open or list them anymore,
   # the relay service (as root) keeps access.
-  services.udev.extraRules = ''
-    SUBSYSTEM=="video4linux", ATTR{name}=="Intel IPU7 ISYS Capture*", MODE="0600"
-  '';
+  #
+  # TAG-="uaccess" is what actually revokes access: 70-uaccess.rules tags
+  # every video4linux device, so logind grants the seat user an ACL regardless
+  # of the mode. Must run after 70 and before 73-seat-late.rules applies the
+  # ACL — hence the 71- file prefix (extraRules lands at 99, too late).
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "ipu7-isys-node-access";
+      text = ''
+        SUBSYSTEM=="video4linux", ATTR{name}=="Intel IPU7 ISYS Capture*", MODE="0600", TAG-="uaccess"
+      '';
+      destination = "/lib/udev/rules.d/71-ipu7-isys.rules";
+    })
+  ];
 
   # Panel Replay/Self-Refresh on the internal display causes noticeable input latency
   # Trade-off: slightly higher idle power draw.
