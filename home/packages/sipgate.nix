@@ -2,6 +2,8 @@
 {
   home.packages = with pkgs; [
     # ktfmt
+    _1password-cli
+    _1password-gui
     ansible
     krew
     kubectl
