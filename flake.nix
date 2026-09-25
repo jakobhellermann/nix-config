@@ -41,9 +41,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # XPS 14 DA14260 hardware profile (IPU7 webcam); unmerged upstream PR
+    # XPS 14 DA14260 hardware profile (IPU7 webcam); cooparo's unmerged
+    # upstream PR branch plus local fixes (unmirrored camera image)
     nixos-hardware = {
-      url = "github:cooparo/nixos-hardware/dell-xps-14-da14260";
+      url = "github:jakobhellermann/nixos-hardware/dell-xps-14-fixes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
