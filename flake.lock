@@ -210,16 +210,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1787901708,
-        "narHash": "sha256-dPWUVzHl4KHs+T3X2AVxaWfDGphBHKJrzdnIn0syU6g=",
-        "owner": "cooparo",
+        "lastModified": 1790750665,
+        "narHash": "sha256-QlSKD8jvKUCimNKE3t613RmYnhsNWSCPy5nFbp3PGbM=",
+        "owner": "jakobhellermann",
         "repo": "nixos-hardware",
-        "rev": "7ea3467315662202a6071092ab653e18a6e38931",
+        "rev": "7738124a7f945054f729e80ba3f8d640f2545ec2",
         "type": "github"
       },
       "original": {
-        "owner": "cooparo",
-        "ref": "dell-xps-14-da14260",
+        "owner": "jakobhellermann",
+        "ref": "dell-xps-14-fixes",
         "repo": "nixos-hardware",
         "type": "github"
       }
