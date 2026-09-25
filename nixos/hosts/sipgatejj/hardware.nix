@@ -68,7 +68,16 @@
   ];
 
   # kernel 7.3-rc needed for CS35L57 speaker fix (spk-id-gpios EBUSY, thesofproject/sof#11152)
-  boot.kernelPackages = pkgs.linuxPackages_testing;
+  # v4l2loopback patched: Chromium (Discord) opens the loopback camera and
+  # writes S_PARM with timeperframe (1,0); the driver stores (0xFFFFFFFF,1)
+  # (~0 fps) for that, which every PipeWire consumer then fails to negotiate
+  # against ("no more input formats" in cheese). Treat a zero denominator as
+  # the default fps instead.
+  boot.kernelPackages = pkgs.linuxPackages_testing.extend (_: prev: {
+    v4l2loopback = prev.v4l2loopback.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [ ./v4l2loopback-zero-denominator.patch ];
+    });
+  });
   assertions = [
     {
       assertion = lib.versionOlder pkgs.linuxPackages_latest.kernel.version "7.3";

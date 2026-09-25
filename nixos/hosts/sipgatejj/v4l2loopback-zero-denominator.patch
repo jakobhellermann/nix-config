@@ -1,0 +1,18 @@
+--- a/v4l2loopback.c
++++ b/v4l2loopback.c
+@@ -635,12 +635,13 @@
+ static void set_timeperframe(struct v4l2_loopback_device *dev,
+ 			     struct v4l2_fract *tpf)
+ {
+-	if (!tpf->denominator && !tpf->numerator) {
++	if (!tpf->denominator) {
++		/* zero denominator is not a valid interval: use the default FPS */
+ 		tpf->numerator = 1;
+ 		tpf->denominator = V4L2LOOPBACK_FPS_DEFAULT;
+ 	} else if (tpf->numerator >
+ 		   V4L2LOOPBACK_FRAME_INTERVAL_MAX * tpf->denominator) {
+-		/* divide-by-zero or greater than maximum interval => min FPS */
++		/* greater than maximum interval => min FPS */
+ 		tpf->numerator = V4L2LOOPBACK_FRAME_INTERVAL_MAX;
+ 		tpf->denominator = 1;
+ 	} else if (tpf->numerator * V4L2LOOPBACK_FPS_MAX < tpf->denominator) {
