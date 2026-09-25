@@ -23,6 +23,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.tmp.useTmpfs = true;
 
+  # allow perf without root; kernel symbols resolvable
+  boot.kernel.sysctl = {
+    "kernel.perf_event_paranoid" = 1;
+    "kernel.kptr_restrict" = 0;
+    # allow attaching to already running processes
+    "kernel.yama.ptrace_scope" = 0;
+  };
+
   networking.networkmanager = {
     enable = true;
     dns = "systemd-resolved";
