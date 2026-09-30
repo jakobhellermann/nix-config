@@ -290,8 +290,10 @@ in
     ../modules/ringo
   ];
   home.packages = with pkgs; [
-    uutils-coreutils-noprefix
     # dockutil
+    # uutils-coreutils-noprefix
+    aws-lc
+    mariadb.client
   ];
 
   local = {
