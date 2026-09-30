@@ -59,6 +59,9 @@
   environment.sessionVariables.PKG_CONFIG_PATH =
     "$HOME/.nix-profile/lib/pkgconfig:" + "$HOME/.nix-profile/share/pkgconfig";
 
+  environment.sessionVariables.CPATH = "$HOME/.nix-profile/include";
+  environment.sessionVariables.LIBRARY_PATH = "$HOME/.nix-profile/lib";
+
   programs.fish.enable = true;
 
   services.openssh = {
