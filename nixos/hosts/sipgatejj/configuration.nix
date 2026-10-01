@@ -13,6 +13,10 @@ in
     ./disko.nix
   ];
 
+  # fixes:
+  # - zed LSP downloads
+  programs.nix-ld.enable = true;
+
   virtualisation.containers.registries.settings = {
     registry = [
       # Artifactory serves images under a path prefix. search registries only accept hostnames, so this needs a prefix rewrite.
