@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  username = "sipgatejj";
+in
 {
   imports = [
     ../../shared.nix
@@ -26,9 +29,15 @@
 
   security.pki.certificateFiles = [ ./sipgate-ca-root_2018-06-01.crt ];
 
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ username ];
+  };
+
   networking.hostName = "sipgatejj";
 
-  users.users.sipgatejj = {
+  users.users.${username} = {
     isNormalUser = true;
     initialPassword = "initial";
     shell = pkgs.fish;
