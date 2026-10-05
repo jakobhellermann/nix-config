@@ -5,6 +5,12 @@
     ./modules/xdg.nix
   ];
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config.global.log_filter = "^(loading|unloading|error)";
+  };
+
   home.activation = {
     installDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       JJ_BIN="${pkgs.jujutsu}/bin/jj --config git.executable-path=${pkgs.git}/bin/git"
