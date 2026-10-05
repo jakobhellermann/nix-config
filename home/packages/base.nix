@@ -15,7 +15,6 @@
     clang
     cmake
     comma
-    direnv
     dix
     docker-compose
     dotnet-sdk_11
