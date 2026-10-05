@@ -13,6 +13,9 @@ darwin:
 home profile=`whoami`:
     nix run nixpkgs#home-manager -- switch --flake .#{{ profile }}
 
+news profile=`whoami`:
+    nix run nixpkgs#home-manager -- news --flake .#{{ profile }}
+
 agenix name:
     @cd secrets && nix run github:ryantm/agenix -- -e "{{ name }}.age"
 
