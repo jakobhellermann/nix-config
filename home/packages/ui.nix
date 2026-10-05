@@ -33,6 +33,7 @@ in
       swayosd
       vesktop
       vicinae
+      vulkan-tools
       waybar
       zed-editor
       (import ./build/cogfly.nix args)

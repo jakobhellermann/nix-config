@@ -72,6 +72,7 @@
     tree-sitter
     unzip
     uv
+    vscode-langservers-extracted
     vtsls
     watchexec
     wtype
