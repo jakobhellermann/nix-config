@@ -18,6 +18,7 @@
     sd
     wev
     wget
+    (pkgs.callPackage ./pkgs/perfetto-tools { })
     xxd
   ];
 }
