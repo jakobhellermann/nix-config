@@ -12,6 +12,8 @@
     jq
     jujutsu
     lsof
+    man-pages
+    man-pages-posix
     neovim
     perf
     ripgrep
