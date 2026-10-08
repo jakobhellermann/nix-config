@@ -5,7 +5,7 @@
     ansible
     krew
     kubectl
-    kubelogin
+    kubelogin-oidc
     maven
     openjdk25_headless
     postgresql
