@@ -6,6 +6,7 @@ in
   imports = [
     ../../shared.nix
     ../../modules/niri.nix
+    ../../modules/keyd.nix
     ../../modules/noctalia.nix
     ../../modules/steam.nix
     ./hardware.nix
