@@ -64,6 +64,11 @@
 
   programs.fish.enable = true;
 
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
