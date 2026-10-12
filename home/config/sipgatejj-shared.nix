@@ -155,6 +155,49 @@ let
     }
   ];
 
+  # Declarative dev account; profiles/contacts derive from the provisioning JSON.
+  declarativeAccount = builtins.fromJSON (
+    builtins.readFile ./sipgateacc/hellermanndeclarativeneo.json
+  );
+
+  declarativeVoizaProfiles = builtins.listToAttrs (
+    lib.mapAttrsToList (name: voiza: {
+      name = "(decneo) ${name}";
+      value = mkDevProfile {
+        name = "(decneo) ${name}";
+        prefix = "dec-v${lib.last (lib.splitString " " name)}";
+        inherit (voiza.credentials) username password;
+      };
+    }) declarativeAccount.voizas
+  );
+
+  declarativeUserProfiles = builtins.listToAttrs (
+    lib.imap0 (i: user: {
+      name = "(decneo) User ${user.personalChannel.name}";
+      value =
+        let
+          device = builtins.head (builtins.attrValues user.devices);
+        in
+        mkDevProfile {
+          name = "(decneo) User ${user.personalChannel.name}";
+          prefix = "dec-u${toString (i + 1)}";
+          inherit (device.credentials) username password;
+        };
+    }) (builtins.attrValues declarativeAccount.users)
+  );
+
+  declarativeContacts =
+    let
+      mkContact = tag: name: v: {
+        name = "${tag} ${name}";
+        numbers = v.numbers;
+      };
+    in
+    lib.filter (c: c.numbers != [ ]) (
+      lib.mapAttrsToList (mkContact "(decneo)") declarativeAccount.voizas
+      ++ lib.mapAttrsToList (mkContact "(devneo)") declarativeAccount.sharedChannels
+    );
+
   # Contacts not backed by one of our own profiles.
   extraContacts = [
     {
@@ -299,8 +342,10 @@ in
   local = {
     ringo = {
       enable = true;
-      contacts = profileContacts ++ extraContacts;
-      inherit profiles;
+      # contacts = profileContacts ++ extraContacts;
+      contacts = declarativeContacts;
+      # inherit profiles;
+      profiles = declarativeVoizaProfiles // declarativeUserProfiles;
       settings.contacts.resolve_incoming = false;
     };
   };

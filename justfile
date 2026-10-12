@@ -11,7 +11,7 @@ darwin:
     sudo darwin-rebuild switch --flake .
 
 home profile=`whoami`:
-    nix run nixpkgs#home-manager -- switch --flake .#{{ profile }}
+    nix run nixpkgs#home-manager -- switch --flake .#{{ profile }} --impure
 
 news profile=`whoami`:
     nix run nixpkgs#home-manager -- news --flake .#{{ profile }}
@@ -52,5 +52,5 @@ _preview attr old inputs="nixpkgs":
         nix flake update {{ inputs }}
     fi
     old=$(readlink -f {{ old }})
-    new=$(nix build ".#{{ attr }}" --no-link --print-out-paths)
+    new=$(nix build ".#{{ attr }}" --no-link --print-out-paths --impure)
     nix run nixpkgs#dix -- "$old" "$new"
