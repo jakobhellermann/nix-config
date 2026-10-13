@@ -33,6 +33,8 @@ in
   };
 
   security.pki.certificateFiles = [ ./sipgate-ca-root_2018-06-01.crt ];
+  # node and bun ship their own root store and ignore security.pki
+  environment.sessionVariables.NODE_EXTRA_CA_CERTS = "${./sipgate-ca-root_2018-06-01.crt}";
 
   programs._1password.enable = true;
   programs._1password-gui = {
