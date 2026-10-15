@@ -6,18 +6,20 @@ let
     user_sipgatejj
   ];
 
-  # system_<hostname> = "ssh-ed25519 AAAA... root@<hostname>";
+  system_sipgatejj = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDTSC1oh1JbJ3ETTXXQKlkNFkgTVT4VevzyaEjBORdqU root@sipgatejj";
+  systems = [ system_sipgatejj ];
 
   names = [
     "user-env"
     "github-nix"
+    "cliproxyapi-api-key"
   ];
 in
 builtins.listToAttrs (
   map (name: {
     name = name + ".age";
     value = {
-      publicKeys = users;
+      publicKeys = users ++ systems;
       armor = true;
     };
   }) names

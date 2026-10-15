@@ -8,6 +8,7 @@ in
     ../../modules/niri.nix
     ../../modules/keyd.nix
     ../../modules/noctalia.nix
+    ../../modules/ai.nix
     ../../modules/steam.nix
     ./hardware.nix
     ./vpn.nix
