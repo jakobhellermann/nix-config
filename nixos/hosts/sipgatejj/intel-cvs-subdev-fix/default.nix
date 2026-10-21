@@ -2,6 +2,7 @@
   lib,
   stdenv,
   kernel,
+  kmodigest,
   xz,
 }:
 
@@ -24,15 +25,18 @@ stdenv.mkDerivation {
     "format"
     "pic"
   ];
-  nativeBuildInputs = kernel.moduleBuildDependencies ++ [ xz ];
+  nativeBuildInputs = kernel.moduleBuildDependencies ++ [
+    kmodigest
+    xz
+  ];
 
   patches = [ ./register-subdev-nodes.patch ];
 
   prePatch = ''
-    cp ${kernel.src}/drivers/media/i2c/cvs/core.c \
-       ${kernel.src}/drivers/media/i2c/cvs/v4l2.c \
-       ${kernel.src}/drivers/media/i2c/cvs/icvs.h \
-       .
+    tar -xf ${kernel.src} --wildcards --strip-components=5 \
+      '*/drivers/media/i2c/cvs/core.c' \
+      '*/drivers/media/i2c/cvs/v4l2.c' \
+      '*/drivers/media/i2c/cvs/icvs.h'
   '';
 
   postPatch = ''
@@ -50,10 +54,12 @@ stdenv.mkDerivation {
 
   # "updates/" beats "kernel/" in depmod's search order, so this shadows the
   # in-tree module without blacklisting.
+  # The module aggregator expects a kmodigest .ko.cer next to every external module.
   installPhase = ''
     runHook preInstall
     install -D -m 644 intel_cvs.ko \
       $out/lib/modules/${kernel.modDirVersion}/updates/intel_cvs.ko
+    kmodigest $out/lib/modules/${kernel.modDirVersion}/updates/intel_cvs.ko
     xz -9 $out/lib/modules/${kernel.modDirVersion}/updates/intel_cvs.ko
     runHook postInstall
   '';

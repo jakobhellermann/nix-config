@@ -26,7 +26,7 @@
   # return -EBUSY and the driver treats that as fatal, so no ALSA card is
   # registered at all (dummy output in wpctl). Patched replacement modules make
   # the driver tolerate -EBUSY and continue without the speaker ID, exactly
-  # like it already does for the shared reset GPIO. Still broken in v7.3-rc4;
+  # like it already does for the shared reset GPIO. Still broken in v7.3;
   # no fix queued upstream. See cs35l56-ebusy-fix/ and thesofproject/sof#11152.
   boot.extraModulePackages = [
     (config.boot.kernelPackages.callPackage ./cs35l56-ebusy-fix { })
@@ -67,25 +67,25 @@
     "xe.enable_panel_replay=0"
   ];
 
-  # kernel 7.3-rc needed for CS35L57 speaker fix (spk-id-gpios EBUSY, thesofproject/sof#11152)
+  # kernel 7.3+ needed for CS35L57 speaker fix (spk-id-gpios EBUSY, thesofproject/sof#11152)
   # v4l2loopback patched: Chromium (Discord) opens the loopback camera and
   # writes S_PARM with timeperframe (1,0); the driver stores (0xFFFFFFFF,1)
   # (~0 fps) for that, which every PipeWire consumer then fails to negotiate
   # against ("no more input formats" in cheese). Treat a zero denominator as
   # the default fps instead.
-  boot.kernelPackages = pkgs.linuxPackages_testing.extend (
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (
     _: prev: {
       v4l2loopback = prev.v4l2loopback.overrideAttrs (old: {
         patches = (old.patches or [ ]) ++ [ ./v4l2loopback-zero-denominator.patch ];
+        # TODO: drop preBuild/installFlags once nixpkgs#575861 is in nixos-unstable
+        preBuild = "";
+        installFlags = [
+          "DEPMOD=true"
+          "INSTALL_MOD_PATH=${placeholder "out"}"
+        ];
       });
     }
   );
-  assertions = [
-    {
-      assertion = lib.versionOlder pkgs.linuxPackages_latest.kernel.version "7.3";
-      message = "linuxPackages_latest is now 7.3+: switch boot.kernelPackages from linuxPackages_testing back to linuxPackages_latest and remove this assertion";
-    }
-  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
