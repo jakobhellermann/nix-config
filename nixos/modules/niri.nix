@@ -5,6 +5,7 @@
   environment.sessionVariables = {
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
+    GTK_USE_PORTAL = "1";
   };
 
   environment.systemPackages = with pkgs; [ xwayland-satellite ];
