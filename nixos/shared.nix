@@ -31,6 +31,8 @@
     "kernel.yama.ptrace_scope" = 0;
     # perf ring buffers for concurrent sessions (dwarf call graphs are large)
     "kernel.perf_event_mlock_kb" = "16384";
+    # old Mono runtimes split-lock constantly; the mitigation sleeps them ~10ms per lock
+    "kernel.split_lock_mitigate" = 0;
   };
 
   networking.networkmanager = {
