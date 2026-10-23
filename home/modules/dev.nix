@@ -28,6 +28,7 @@
       (lib.hiPrio xorgproto.out)
       # sdl3 splits into out/lib/dev; the libSDL3.so linker symlink lives in lib
       sdl3.lib
+      shaderc
       vulkan-headers
       vulkan-loader
     ]);
